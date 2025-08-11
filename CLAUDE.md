@@ -52,6 +52,15 @@ npm run lint         # Run ESLint
 - After grace period: Remaining principal amortized over remaining months
 - Affects average monthly payment calculation
 
+#### Interest Rate Ratio (利息佔比)
+- Calculated as: Total Interest / Principal × 100%
+- Normal ranges by loan term:
+  - 20 years: ~40-60% (depends on interest rate)
+  - 30 years: ~60-120% (depends on interest rate)
+  - 40 years: ~80-160% (depends on interest rate)
+- Grace periods increase total interest as principal remains unchanged during grace
+- Ratios over 100% are normal for long-term loans, meaning total interest exceeds principal
+
 ### Component Structure
 - **`MortgageCalculator`**: Main container managing state and calculation triggers
 - **`LoanInputForm`**: Handles all user inputs with real-time validation

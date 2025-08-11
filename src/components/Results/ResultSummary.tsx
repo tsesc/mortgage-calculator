@@ -102,11 +102,21 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ result, loanAmount, loanY
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <FaCoins className="text-gray-500 mr-3" />
-              <span className="text-gray-600">利息佔比</span>
+              <span className="text-gray-600">
+                利息佔比
+                <span className="text-xs text-gray-400 ml-1">(總利息/本金)</span>
+              </span>
             </div>
-            <span className="font-semibold text-gray-800">
-              {formatPercent(interestRate, 2)}
-            </span>
+            <div className="text-right">
+              <span className="font-semibold text-gray-800">
+                {formatPercent(interestRate, 2)}
+              </span>
+              {interestRate > 100 && (
+                <div className="text-xs text-amber-600 mt-1">
+                  長期貸款利息總額超過本金
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -126,6 +136,20 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ result, loanAmount, loanY
         </div>
       </div>
 
+      {interestRate > 80 && (
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded mb-4">
+          <p className="text-sm text-blue-800">
+            <strong>利息佔比說明：</strong>
+            利息佔比 {formatPercent(interestRate, 2)} 表示您將支付的總利息為本金的 {formatPercent(interestRate, 2)}。
+            {interestRate > 100 && '由於貸款期限較長，總利息支出超過貸款本金是正常現象。'}
+            {graceMonths > 0 && '寬限期會增加總利息支出，因為在寬限期內只付利息不還本金。'}
+          </p>
+          <div className="mt-2 text-xs text-blue-600">
+            參考範圍：20年貸款約40-60%、30年貸款約60-120%、40年貸款約80-160%（依利率而定）
+          </div>
+        </div>
+      )}
+      
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
         <p className="text-sm text-yellow-800">
           <strong>提醒：</strong>
