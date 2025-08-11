@@ -67,35 +67,35 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           輸入模式
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           <button
             onClick={() => onChange({ inputMode: INPUT_MODES.TOTAL_PRICE })}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               loanInput.inputMode === INPUT_MODES.TOTAL_PRICE
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'
             )}
           >
-            <FaHome className="inline mr-2" />
-            房屋總價
+            <FaHome className="inline mr-1 sm:mr-2 text-xs sm:text-sm" />
+            <span className="block sm:inline">房屋總價</span>
           </button>
           <button
             onClick={() => onChange({ inputMode: INPUT_MODES.LOAN_AMOUNT })}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               loanInput.inputMode === INPUT_MODES.LOAN_AMOUNT
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'
             )}
           >
-            <FaMoneyBillWave className="inline mr-2" />
-            貸款金額
+            <FaMoneyBillWave className="inline mr-1 sm:mr-2 text-xs sm:text-sm" />
+            <span className="block sm:inline">貸款金額</span>
           </button>
         </div>
       </div>
@@ -110,10 +110,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
             <div className="relative">
               <input
                 type="text"
+                inputMode="numeric"
                 value={loanInput.totalPrice || ''}
                 onChange={(e) => handleNumericChange('totalPrice', e.target.value)}
                 className={clsx(
-                  'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent',
+                  'w-full px-3 sm:px-4 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base sm:text-sm touch-manipulation',
                   getFieldError('totalPrice') ? 'border-red-500' : 'border-gray-300'
                 )}
                 placeholder="例：10,000,000"
@@ -136,10 +137,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
             </label>
             <input
               type="number"
+              inputMode="numeric"
               value={loanInput.loanRatio || ''}
               onChange={(e) => handleNumericChange('loanRatio', e.target.value)}
               className={clsx(
-                'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent',
+                'w-full px-3 sm:px-4 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base sm:text-sm touch-manipulation',
                 getFieldError('loanRatio') ? 'border-red-500' : 'border-gray-300'
               )}
               placeholder="例：80"
@@ -167,10 +169,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
           <div className="relative">
             <input
               type="text"
+              inputMode="numeric"
               value={loanInput.loanAmount || ''}
               onChange={(e) => handleNumericChange('loanAmount', e.target.value)}
               className={clsx(
-                'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent',
+                'w-full px-3 sm:px-4 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base sm:text-sm touch-manipulation',
                 getFieldError('loanAmount') ? 'border-red-500' : 'border-gray-300'
               )}
               placeholder="例：8,000,000"
@@ -187,7 +190,7 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             <FaCalendarAlt className="inline mr-2" />
@@ -195,10 +198,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
           </label>
           <input
             type="number"
+            inputMode="numeric"
             value={loanInput.loanYears || ''}
             onChange={(e) => handleNumericChange('loanYears', e.target.value)}
             className={clsx(
-              'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent',
+              'w-full px-3 sm:px-4 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base sm:text-sm touch-manipulation',
               getFieldError('loanYears') ? 'border-red-500' : 'border-gray-300'
             )}
             placeholder="例：30"
@@ -217,10 +221,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
           </label>
           <input
             type="number"
+            inputMode="numeric"
             value={loanInput.graceYears || ''}
             onChange={(e) => handleNumericChange('graceYears', e.target.value)}
             className={clsx(
-              'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent',
+              'w-full px-3 sm:px-4 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base sm:text-sm touch-manipulation',
               getFieldError('graceYears') ? 'border-red-500' : 'border-gray-300'
             )}
             placeholder="例：2"
@@ -243,11 +248,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
         <label className="block text-sm font-medium text-gray-700 mb-2">
           貸款方案
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           <button
             onClick={() => onChange({ loanPlan: LOAN_PLANS.YOUTH })}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               loanInput.loanPlan === LOAN_PLANS.YOUTH
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'
@@ -258,7 +263,7 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
           <button
             onClick={() => onChange({ loanPlan: LOAN_PLANS.CUSTOM })}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               loanInput.loanPlan === LOAN_PLANS.CUSTOM
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'
@@ -298,7 +303,7 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
             </label>
             <button
               onClick={addRatePeriod}
-              className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm flex items-center"
+              className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm flex items-center touch-manipulation"
             >
               <FaPlus className="mr-1" />
               新增區間
@@ -328,63 +333,66 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
                   )}
                 </div>
                 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   <div>
-                    <label className="text-xs text-gray-600">起始月份</label>
+                    <label className="text-xs text-gray-600 mb-1 block">起始月份</label>
                     <input
                       type="number"
+                      inputMode="numeric"
                       value={rate.startMonth}
                       onChange={(e) => handleRateChange(index, { startMonth: parseInt(e.target.value) })}
-                      className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                      className="w-full px-2 py-2 sm:py-1 border border-gray-300 rounded text-sm touch-manipulation"
                       placeholder="1"
                       min="1"
                     />
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 block mt-1">
                       {rate.startMonth && formatMonthToYear(rate.startMonth)}
                     </span>
                   </div>
                   
                   <div>
-                    <label className="text-xs text-gray-600">結束月份</label>
+                    <label className="text-xs text-gray-600 mb-1 block">結束月份</label>
                     <input
                       type="number"
+                      inputMode="numeric"
                       value={rate.endMonth || ''}
                       onChange={(e) => handleRateChange(index, { 
                         endMonth: e.target.value ? parseInt(e.target.value) : undefined 
                       })}
-                      className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                      className="w-full px-2 py-2 sm:py-1 border border-gray-300 rounded text-sm touch-manipulation"
                       placeholder="無限制"
                     />
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 block mt-1">
                       {rate.endMonth ? formatMonthToYear(rate.endMonth) : '至結束'}
                     </span>
                   </div>
                   
                   <div>
-                    <label className="text-xs text-gray-600">年利率 (%)</label>
+                    <label className="text-xs text-gray-600 mb-1 block">年利率 (%)</label>
                     <input
                       type="number"
+                      inputMode="decimal"
                       value={rate.rate}
                       onChange={(e) => handleRateChange(index, { rate: parseFloat(e.target.value) })}
-                      className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                      className="w-full px-2 py-2 sm:py-1 border border-gray-300 rounded text-sm touch-manipulation"
                       placeholder="2.0"
                       step="0.001"
                       min="0"
                       max="20"
                     />
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 block mt-1">
                       {rate.rate && formatPercent(rate.rate, 3)}
                     </span>
                   </div>
                 </div>
                 
                 <div className="mt-2">
-                  <label className="text-xs text-gray-600">說明（選填）</label>
+                  <label className="text-xs text-gray-600 mb-1 block">說明（選填）</label>
                   <input
                     type="text"
                     value={rate.description || ''}
                     onChange={(e) => handleRateChange(index, { description: e.target.value })}
-                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                    className="w-full px-2 py-2 sm:py-1 border border-gray-300 rounded text-sm touch-manipulation"
                     placeholder="例：政府補貼期間"
                   />
                 </div>
@@ -404,11 +412,11 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
         <label className="block text-sm font-medium text-gray-700 mb-2">
           還款方式
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           <button
             onClick={() => onRepaymentMethodChange(REPAYMENT_METHODS.EQUAL_PRINCIPAL_AND_INTEREST)}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               repaymentMethod === REPAYMENT_METHODS.EQUAL_PRINCIPAL_AND_INTEREST
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'
@@ -419,7 +427,7 @@ const LoanInputForm: React.FC<LoanInputFormProps> = ({
           <button
             onClick={() => onRepaymentMethodChange(REPAYMENT_METHODS.EQUAL_PRINCIPAL)}
             className={clsx(
-              'px-4 py-2 rounded-lg border-2 transition-all',
+              'px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 transition-all text-sm sm:text-base touch-manipulation',
               repaymentMethod === REPAYMENT_METHODS.EQUAL_PRINCIPAL
                 ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                 : 'border-gray-300 hover:border-gray-400'

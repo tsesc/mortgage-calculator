@@ -139,27 +139,27 @@ const MortgageCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+        <header className="text-center mb-6 sm:mb-10">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
             房屋貸款計算機
           </h1>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600 px-2">
             快速試算您的房貸月付金，支援新青安優惠方案
           </p>
           <button
             onClick={handleReset}
-            className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
+            className="mt-3 sm:mt-4 px-3 sm:px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm touch-manipulation"
           >
             重置所有設定
           </button>
         </header>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-gray-800">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2 sm:mb-0">
                   貸款資訊輸入
                 </h2>
                 <div className="text-xs text-gray-500">
@@ -176,15 +176,15 @@ const MortgageCalculator: React.FC = () => {
             </div>
 
             {loanInput.loanPlan === LOAN_PLANS.YOUTH && (
-              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-3 sm:p-4 rounded">
                 <button
                   onClick={() => setShowPolicyInfo(!showPolicyInfo)}
-                  className="flex items-center justify-between w-full text-left"
+                  className="flex items-center justify-between w-full text-left touch-manipulation"
                 >
-                  <span className="font-semibold text-blue-800">
+                  <span className="font-semibold text-blue-800 text-sm sm:text-base">
                     新青安貸款政策說明
                   </span>
-                  <span className="text-blue-600">
+                  <span className="text-blue-600 text-sm sm:text-base">
                     {showPolicyInfo ? '收起' : '展開'}
                   </span>
                 </button>
@@ -193,11 +193,11 @@ const MortgageCalculator: React.FC = () => {
             )}
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {calculationResult && (
               <>
-                <div className="bg-white rounded-xl shadow-lg p-6">
-                  <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                  <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">
                     試算結果
                   </h2>
                   <ResultSummary
@@ -208,14 +208,14 @@ const MortgageCalculator: React.FC = () => {
                   />
                 </div>
 
-                <div className="bg-white rounded-xl shadow-lg p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-gray-800">
+                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
                       還款明細表
                     </h3>
                     <button
                       onClick={() => setShowPaymentDetails(!showPaymentDetails)}
-                      className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                      className="px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base touch-manipulation w-full sm:w-auto"
                     >
                       {showPaymentDetails ? '隱藏明細' : '顯示明細'}
                     </button>
@@ -228,11 +228,11 @@ const MortgageCalculator: React.FC = () => {
             )}
 
             {errors.length > 0 && (
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-                <p className="font-semibold text-red-800 mb-2">請修正以下錯誤：</p>
-                <ul className="list-disc list-inside text-red-700">
+              <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-4 rounded">
+                <p className="font-semibold text-red-800 mb-2 text-sm sm:text-base">請修正以下錯誤：</p>
+                <ul className="list-disc list-inside text-red-700 space-y-1">
                   {errors.map((error, index) => (
-                    <li key={index}>{error.message}</li>
+                    <li key={index} className="text-sm leading-relaxed">{error.message}</li>
                   ))}
                 </ul>
               </div>
