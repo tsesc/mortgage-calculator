@@ -3,6 +3,24 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "台灣房屋貸款計算機 - 支援新青安方案的多段式利率貸款試算工具 | Taiwan Mortgage Calculator with Youth Housing Loan Support",
+  "homepage": "https://tsesc.github.io/mortgage-calculator/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsesc/mortgage-calculator.git"
+  },
+  "keywords": [
+    "mortgage-calculator",
+    "taiwan-mortgage",
+    "youth-housing-loan",
+    "新青安",
+    "房屋貸款",
+    "貸款試算",
+    "利率計算",
+    "台灣房貸",
+    "本息攤還",
+    "本金攤還"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
