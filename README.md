@@ -2,6 +2,8 @@
 
 一個功能完整的台灣房屋貸款試算工具，支援新青安等多段式利率計算。
 
+🔗 **線上試用**: https://tsesc.github.io/mortgage-calculator/
+
 ## 功能特色
 
 ### 核心功能
