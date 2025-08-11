@@ -50,11 +50,11 @@ const PaymentTable: React.FC<PaymentTableProps> = ({ payments }) => {
   
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex gap-2">
           <button
             onClick={() => setViewMode('yearly')}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base rounded-lg ${
               viewMode === 'yearly'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -64,7 +64,7 @@ const PaymentTable: React.FC<PaymentTableProps> = ({ payments }) => {
           </button>
           <button
             onClick={() => setViewMode('monthly')}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base rounded-lg ${
               viewMode === 'monthly'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -97,87 +97,100 @@ const PaymentTable: React.FC<PaymentTableProps> = ({ payments }) => {
         )}
       </div>
       
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-lg overflow-hidden">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                {viewMode === 'monthly' ? '期數' : '年度'}
-              </th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
-                本金
-              </th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
-                利息
-              </th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
-                {viewMode === 'monthly' ? '月付金' : '年付金'}
-              </th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
-                剩餘本金
-              </th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
-                利率
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {currentData.map((payment, index) => (
-              <tr key={index} className={payment.isGracePeriod ? "bg-amber-50 hover:bg-amber-100" : "hover:bg-gray-50"}>
-                <td className="px-4 py-3 text-sm text-gray-900">
-                  {viewMode === 'monthly' 
-                    ? `第 ${payment.month} 期`
-                    : `第 ${payment.month} 年`
-                  }
-                  {payment.isGracePeriod && viewMode === 'monthly' && (
-                    <span className="ml-2 text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded">
-                      寬限期
-                    </span>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-sm text-gray-700 text-right">
-                  {formatCurrency(payment.principal)}
-                </td>
-                <td className="px-4 py-3 text-sm text-gray-700 text-right">
-                  {formatCurrency(payment.interest)}
-                </td>
-                <td className="px-4 py-3 text-sm font-semibold text-gray-900 text-right">
-                  {formatCurrency(payment.totalPayment)}
-                </td>
-                <td className="px-4 py-3 text-sm text-gray-700 text-right">
-                  {formatCurrency(payment.remainingBalance)}
-                </td>
-                <td className="px-4 py-3 text-sm text-gray-700 text-right">
-                  {formatPercent(payment.currentRate, 3)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot className="bg-gray-100">
-            <tr>
-              <td className="px-4 py-3 text-sm font-semibold text-gray-900">
-                總計
-              </td>
-              <td className="px-4 py-3 text-sm font-semibold text-gray-900 text-right">
-                {formatCurrency(
-                  displayData[displayData.length - 1]?.cumulativePrincipal || 0
-                )}
-              </td>
-              <td className="px-4 py-3 text-sm font-semibold text-gray-900 text-right">
-                {formatCurrency(
-                  displayData[displayData.length - 1]?.cumulativeInterest || 0
-                )}
-              </td>
-              <td className="px-4 py-3 text-sm font-semibold text-gray-900 text-right">
-                {formatCurrency(
-                  (displayData[displayData.length - 1]?.cumulativePrincipal || 0) +
-                  (displayData[displayData.length - 1]?.cumulativeInterest || 0)
-                )}
-              </td>
-              <td colSpan={2}></td>
-            </tr>
-          </tfoot>
-        </table>
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <div className="inline-block min-w-full py-2 align-middle sm:px-0 px-4">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                    {viewMode === 'monthly' ? '期數' : '年度'}
+                  </th>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
+                    本金
+                  </th>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
+                    利息
+                  </th>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                    {viewMode === 'monthly' ? '月付金' : '年付金'}
+                  </th>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                    剩餘本金
+                  </th>
+                  <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">
+                    利率
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {currentData.map((payment, index) => (
+                  <tr key={index} className={payment.isGracePeriod ? "bg-amber-50 hover:bg-amber-100" : "hover:bg-gray-50"}>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 whitespace-nowrap">
+                      <div className="flex flex-col sm:flex-row sm:items-center">
+                        <span>
+                          {viewMode === 'monthly' 
+                            ? `第 ${payment.month} 期`
+                            : `第 ${payment.month} 年`
+                          }
+                        </span>
+                        {payment.isGracePeriod && viewMode === 'monthly' && (
+                          <span className="mt-1 sm:mt-0 sm:ml-2 text-xs bg-amber-200 text-amber-800 px-1 sm:px-2 py-0.5 rounded inline-block">
+                            寬限期
+                          </span>
+                        )}
+                      </div>
+                      {/* 手機版顯示本金和利息 */}
+                      <div className="sm:hidden mt-1 text-xs text-gray-500">
+                        <div>本金: {formatCurrency(payment.principal)}</div>
+                        <div>利息: {formatCurrency(payment.interest)}</div>
+                      </div>
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 text-right hidden sm:table-cell">
+                      {formatCurrency(payment.principal)}
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 text-right hidden sm:table-cell">
+                      {formatCurrency(payment.interest)}
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-gray-900 text-right whitespace-nowrap">
+                      {formatCurrency(payment.totalPayment)}
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 text-right whitespace-nowrap">
+                      {formatCurrency(payment.remainingBalance)}
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-700 text-right hidden md:table-cell">
+                      {formatPercent(payment.currentRate, 3)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot className="bg-gray-50">
+                <tr>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-gray-900">
+                    總計
+                  </td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-gray-900 text-right hidden sm:table-cell">
+                    {formatCurrency(
+                      displayData[displayData.length - 1]?.cumulativePrincipal || 0
+                    )}
+                  </td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-gray-900 text-right hidden sm:table-cell">
+                    {formatCurrency(
+                      displayData[displayData.length - 1]?.cumulativeInterest || 0
+                    )}
+                  </td>
+                  <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-gray-900 text-right whitespace-nowrap">
+                    {formatCurrency(
+                      (displayData[displayData.length - 1]?.cumulativePrincipal || 0) +
+                      (displayData[displayData.length - 1]?.cumulativeInterest || 0)
+                    )}
+                  </td>
+                  <td className="hidden sm:table-cell" colSpan={2}></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
