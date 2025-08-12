@@ -209,6 +209,8 @@ const MortgageCalculator: React.FC = () => {
                     }
                     loanYears={loanInput.loanYears || 30}
                     graceYears={loanInput.graceYears}
+                    totalPrice={loanInput.inputMode === INPUT_MODES.TOTAL_PRICE ? loanInput.totalPrice : undefined}
+                    loanRatio={loanInput.inputMode === INPUT_MODES.TOTAL_PRICE ? loanInput.loanRatio : undefined}
                   />
                 </div>
 

@@ -8,14 +8,17 @@ interface ResultSummaryProps {
   loanAmount: number;
   loanYears: number;
   graceYears?: number;
+  totalPrice?: number;
+  loanRatio?: number;
 }
 
-const ResultSummary: React.FC<ResultSummaryProps> = ({ result, loanAmount, loanYears, graceYears }) => {
+const ResultSummary: React.FC<ResultSummaryProps> = ({ result, loanAmount, loanYears, graceYears, totalPrice, loanRatio }) => {
   const interestRate = (result.totalInterest / loanAmount) * 100;
   const monthlyPaymentVariation = result.maxMonthlyPayment - result.minMonthlyPayment;
   const graceMonths = (graceYears || 0) * 12;
   const gracePeriodPayments = result.monthlyPayments.slice(0, graceMonths);
   const gracePeriodInterest = gracePeriodPayments.reduce((sum, p) => sum + p.interest, 0);
+  const downPayment = totalPrice && loanRatio ? totalPrice - loanAmount : 0;
   
   return (
     <div className="space-y-6">
@@ -57,6 +60,21 @@ const ResultSummary: React.FC<ResultSummaryProps> = ({ result, loanAmount, loanY
       <div className="bg-gray-50 p-6 rounded-xl">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">詳細分析</h3>
         <div className="space-y-4">
+          {totalPrice && loanRatio && (
+            <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+              <div className="flex items-center">
+                <FaMoneyBillWave className="text-gray-500 mr-3" />
+                <span className="text-gray-600">頭期款</span>
+              </div>
+              <span className="font-semibold text-gray-800">
+                {formatCurrency(downPayment)}
+                <span className="text-sm text-gray-500 ml-2">
+                  ({100 - loanRatio}%)
+                </span>
+              </span>
+            </div>
+          )}
+          
           <div className="flex justify-between items-center pb-3 border-b border-gray-200">
             <div className="flex items-center">
               <FaMoneyBillWave className="text-gray-500 mr-3" />
