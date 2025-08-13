@@ -142,7 +142,7 @@ const MortgageCalculator: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            房屋貸款計算機
+            2025房屋貸款超級計算機
           </h1>
           <p className="text-gray-600">
             快速試算您的房貸月付金，支援新青安優惠方案
