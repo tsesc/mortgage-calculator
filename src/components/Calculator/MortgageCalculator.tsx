@@ -33,18 +33,18 @@ const MortgageCalculator: React.FC = () => {
     'mortgageCalculatorMethod',
     REPAYMENT_METHODS.EQUAL_PRINCIPAL_AND_INTEREST
   );
-  
+
   // 使用 localStorage 儲存顯示狀態
   const [showPaymentDetails, setShowPaymentDetails] = useLocalStorage(
     'mortgageCalculatorShowDetails',
     false
   );
-  
+
   const [showPolicyInfo, setShowPolicyInfo] = useLocalStorage(
     'mortgageCalculatorShowPolicy',
     false
   );
-  
+
   // 這些不需要持久化
   const [calculationResult, setCalculationResult] = useState<LoanCalculationResult | null>(null);
   const [errors, setErrors] = useState<ValidationError[]>([]);
@@ -52,26 +52,26 @@ const MortgageCalculator: React.FC = () => {
   const calculate = useCallback(() => {
     const validationErrors = validateLoanInput(loanInput);
     setErrors(validationErrors);
-    
+
     if (validationErrors.length > 0) {
       setCalculationResult(null);
       return;
     }
-    
+
     let finalLoanAmount = loanInput.loanAmount || 0;
-    
+
     if (loanInput.inputMode === INPUT_MODES.TOTAL_PRICE) {
       finalLoanAmount = calculateLoanAmount(
         loanInput.totalPrice || 0,
         loanInput.loanRatio || 80
       );
     }
-    
+
     const input: LoanInput = {
       ...loanInput as LoanInput,
       loanAmount: finalLoanAmount
     };
-    
+
     const result = calculateMortgage(input, repaymentMethod);
     setCalculationResult(result);
   }, [loanInput, repaymentMethod]);
@@ -90,7 +90,7 @@ const MortgageCalculator: React.FC = () => {
       console.log('總還款:', Math.round(calculationResult.totalPayment));
       console.log('利息佔比:', interestRatio.toFixed(2) + '%');
       console.log('平均月付金:', Math.round(calculationResult.averageMonthlyPayment));
-      
+
       if (interestRatio > 60) {
         console.error('❌ 利息佔比異常偏高!');
       } else if (interestRatio < 10) {
@@ -104,7 +104,7 @@ const MortgageCalculator: React.FC = () => {
   const handleInputChange = (updates: Partial<LoanInput>) => {
     setLoanInput(prev => {
       const newInput = { ...prev, ...updates };
-      
+
       if (updates.inputMode === INPUT_MODES.TOTAL_PRICE && updates.totalPrice && prev.loanRatio) {
         newInput.loanAmount = calculateLoanAmount(updates.totalPrice, prev.loanRatio);
       } else if (updates.totalPrice && updates.loanRatio) {
@@ -113,7 +113,7 @@ const MortgageCalculator: React.FC = () => {
           updates.loanRatio || prev.loanRatio || 80
         );
       }
-      
+
       if (updates.loanPlan === LOAN_PLANS.YOUTH) {
         if ((newInput.loanAmount || 0) > YOUTH_LOAN_POLICY.maxAmount) {
           newInput.loanAmount = YOUTH_LOAN_POLICY.maxAmount;
@@ -122,7 +122,7 @@ const MortgageCalculator: React.FC = () => {
           newInput.loanYears = YOUTH_LOAN_POLICY.maxYears;
         }
       }
-      
+
       return newInput;
     });
   };
@@ -142,7 +142,7 @@ const MortgageCalculator: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            2025房屋貸款超級計算機
+            2025房屋貸款試算
           </h1>
           <p className="text-gray-600">
             快速試算您的房貸月付金，支援新青安優惠方案
