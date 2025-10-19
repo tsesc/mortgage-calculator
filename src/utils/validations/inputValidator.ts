@@ -61,11 +61,6 @@ export function validateLoanInput(input: Partial<LoanInput>): ValidationError[] 
       field: 'loanYears',
       message: '新青安貸款最長年限為 40 年'
     });
-  } else if (input.loanYears && input.loanYears > 30) {
-    errors.push({
-      field: 'loanYears',
-      message: '一般房貸最長年限為 30 年'
-    });
   }
   
   // 驗證寬限期
